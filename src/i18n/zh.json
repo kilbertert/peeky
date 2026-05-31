@@ -1,0 +1,179 @@
+{
+  "app.name": "Peeky",
+
+  "settings.title": "Peeky 设置",
+  "settings.close": "关闭",
+  "settings.save": "保存",
+  "settings.saved": "已保存",
+  "settings.saving": "保存中…",
+
+  "settings.section.model": "模型",
+  "settings.section.behavior": "行为",
+  "settings.section.quiet": "安静与专注",
+  "settings.section.capture": "截屏",
+  "settings.section.permission": "权限",
+  "settings.section.language": "语言",
+  "settings.section.mascot": "小精灵",
+  "settings.section.stats": "Token 消耗",
+  "settings.section.power": "开关",
+
+  "settings.tab.mode": "模式",
+  "settings.tab.model": "模型",
+  "settings.tab.behavior": "行为",
+  "settings.tab.quiet": "安静",
+  "settings.tab.mascot": "精灵",
+  "settings.tab.usage": "用量",
+  "settings.tab.history": "历史",
+  "settings.tab.general": "通用",
+
+  "settings.mode.label": "当前模式",
+  "settings.mode.hint": "小精灵开口时做什么(也可按 Ctrl+Shift+M 切换)。",
+
+  "settings.history.empty": "暂无历史——小精灵说过的话会显示在这里。",
+  "settings.history.clear": "清空历史",
+  "settings.history.cleared": "已清空",
+
+  "error.config_incomplete": "请先在设置里填写 API 地址、密钥和模型名（Ctrl+Shift+S）。",
+  "error.capture": "无法截屏——请在系统设置里授予「屏幕录制」权限。",
+  "error.api": "模型请求失败",
+  "error.empty_response": "模型返回了空内容——试试调高 max tokens（有些模型会强制隐藏的「思考」过程，把预算吃光）。",
+  "error.agent_limit": "已达操作步数上限，已停止。",
+  "error.tool_blocked": "操作被拦截",
+  "error.screen_permission": "需要「屏幕录制」权限才能截图——请在 系统设置 › 隐私与安全性 › 屏幕录制 中勾选 Peeky，然后重启应用。",
+
+  "settings.screenperm.label": "屏幕录制权限",
+  "settings.screenperm.hint": "Peeky 需要此权限才能看到你的屏幕。授权后通常要重启应用才生效。",
+  "settings.screenperm.granted": "已授权",
+  "settings.screenperm.denied": "未授权",
+  "settings.screenperm.grant": "去授权…",
+  "settings.screenperm.recheck": "重新检测",
+  "settings.screenperm.black": "已授权但截图是黑屏——请彻底退出并重启 Peeky",
+  "error.screen_black": "截到的是黑屏——屏幕录制权限通常要彻底退出并重启 Peeky 才会生效（开发模式下尤其不稳定，建议用打包后的 App 测试）。",
+
+  "status.thinking": "思考中…",
+  "status.reading": "正在读取屏幕…",
+  "status.scrolling": "正在滚动…",
+  "status.clicking": "正在点击…",
+  "status.typing": "正在输入…",
+  "status.key": "正在按键…",
+  "status.acting": "正在操作…",
+
+  "ask.placeholder": "问问这个画面…",
+  "ask.hint": "Enter 发送 · Shift+Enter 换行 · Esc 取消",
+  "capture.loading": "正在准备截图…",
+  "capture.hint": "按住拖动选择区域 · Esc 取消",
+
+  "settings.baseUrl.label": "Base URL",
+  "settings.baseUrl.placeholder": "https://platform.stepfun.com/v1",
+  "settings.baseUrl.hint": "任意兼容 OpenAI 协议的端点（云端 / 私有化 / 本地）。",
+  "settings.baseUrl.required": "Base URL 为必填项。",
+
+  "settings.apiKey.label": "API Key",
+  "settings.apiKey.placeholder": "sk-…",
+  "settings.apiKey.hint": "仅保存在本地，也可通过环境变量 PEEKY_API_KEY 提供。",
+  "settings.apiKey.required": "API Key 为必填项。",
+  "settings.apiKey.show": "显示密钥",
+  "settings.apiKey.hide": "隐藏密钥",
+
+  "settings.model.label": "模型名称",
+  "settings.model.placeholder": "step-3.7-flash",
+  "settings.model.hint": "支持视觉的模型（OpenAI chat/completions 格式）。",
+  "settings.model.required": "模型名称为必填项。",
+
+  "settings.maxTokens.label": "最大输出 token",
+  "settings.maxTokens.hint": "每次回复长度的上限。",
+
+  "settings.temperature.label": "温度",
+  "settings.temperature.hint": "越高越发散，越低越聚焦。",
+
+  "settings.reasoning.label": "推理强度",
+  "settings.reasoning.hint": "模型回答前“思考”的程度：越低越快，越高越准。多数模型（如 Step 3.7 Flash）默认会思考，调低能明显提速。注意：“关闭”取决于服务商——StepFun 仅支持低/中/高，关闭可能无效或报错，这类情况请用“低”。",
+  "reasoning.off": "关闭 · 最快",
+  "reasoning.low": "低 · 快（默认）",
+  "reasoning.medium": "中 · 均衡",
+  "reasoning.high": "高 · 最准最慢",
+
+  "settings.test.button": "测试连接",
+  "settings.test.testing": "测试中…",
+  "settings.test.success": "连接正常",
+  "settings.test.failed": "连接失败",
+
+  "settings.sensitivity.label": "触发灵敏度",
+  "settings.sensitivity.hint": "屏幕变化多容易唤醒 Peeky。",
+
+  "settings.budget.label": "发言预算（每小时）",
+  "settings.budget.hint": "每小时主动说话的次数上限，超出的时刻会默默攒下。",
+
+  "settings.quietHours.label": "安静时段",
+  "settings.quietHours.enable": "启用安静时段",
+  "settings.quietHours.start": "开始",
+  "settings.quietHours.end": "结束",
+  "settings.quietHours.hint": "在此时间段内 Peeky 保持安静，可跨午夜。",
+
+  "settings.followDnd.label": "跟随系统勿扰",
+  "settings.followDnd.hint": "当 macOS 专注 / 勿扰开启时，Peeky 自动闭嘴。",
+
+  "settings.screenshotQuality.label": "截屏质量",
+  "settings.screenshotQuality.hint": "质量越高识别越准，但消耗的 token 也越多。",
+
+  "settings.permission.label": "权限模式",
+  "settings.permission.hint": "控制 Peeky 自主操作的程度（只影响“做”，不影响“看”和“说”）。",
+
+  "settings.language.label": "语言",
+  "settings.language.hint": "界面与回复语言，自动则跟随系统区域设置。",
+
+  "settings.mascot.heading": "换一只属于你自己的小精灵",
+  "settings.mascot.intro": "想换一只属于你自己的小精灵？复制下面这段，改成你想要的样子，发给你电脑上的 Codex 即可。",
+  "settings.mascot.copy": "复制指令",
+  "settings.mascot.copied": "已复制！",
+  "settings.mascot.template": "请帮我为「Peeky」桌面屏幕伴侣生成一只自定义小精灵，主题：<在这里写自己的描述，例如“一只戴魔法帽的橘猫”>。\n要求：\n1. 生成一套带动画帧的精灵图（sprite sheet / 帧序列），覆盖这些状态：\n   idle / scanning / thinking / talking / has-something / working / paused\n   每个状态若干帧，风格统一、帧间连贯、透明背景。\n2. 把生成好的资源文件，直接替换到应用的形象资源目录：\n   <APP_ASSETS_DIR>/mascot/<state>/frame_*.png\n   （按状态分目录，文件名递增编号，覆盖现有文件）。\n3. 替换完成后，关闭并重启「Peeky」应用，使新形象生效。",
+
+  "settings.showStats.label": "显示 token 消耗统计",
+  "settings.showStats.hint": "在本面板显示调用次数与 token 计数。",
+
+  "settings.stats.calls": "调用次数",
+  "settings.stats.prompt": "提示 token",
+  "settings.stats.completion": "输出 token",
+  "settings.stats.silent": "沉默次数",
+  "settings.stats.refresh": "刷新",
+  "settings.stats.hidden": "已隐藏 token 统计。开启“显示 token 消耗统计”即可查看。",
+
+  "settings.pause.label": "观察",
+  "settings.pause.paused": "已暂停 —— Peeky 正在睡觉",
+  "settings.pause.active": "运行中 —— Peeky 正在观察",
+  "settings.pause.button.pause": "暂停",
+  "settings.pause.button.resume": "恢复",
+
+  "quality.low": "低",
+  "quality.med": "中",
+  "quality.high": "高",
+
+  "mode.roast": "段子手",
+  "mode.nerd": "博学",
+  "mode.copilot": "副驾",
+  "mode.roast.desc": "站在你身边的幽默朋友。",
+  "mode.nerd.desc": "补充你可能不知道的背景。",
+  "mode.copilot.desc": "从“看”到“做”。",
+
+  "permission.yolo": "YOLO",
+  "permission.auto": "Auto",
+  "permission.cautious": "谨慎",
+  "permission.yolo.desc": "自主执行大部分操作，仍受硬限制约束。",
+  "permission.auto.desc": "低风险自动执行，较高风险先确认。",
+  "permission.cautious.desc": "每一步都需授权。",
+
+  "language.auto": "自动（跟随系统）",
+  "language.en": "English",
+  "language.zh": "中文",
+  "language.ja": "日本語",
+
+  "tooltip.settings": "设置",
+  "tooltip.pause": "暂停 / 恢复（双击）",
+  "tooltip.mode": "切换模式",
+  "tooltip.trigger": "立即查看",
+  "tooltip.tools": "工具",
+
+  "common.on": "开",
+  "common.off": "关",
+  "common.required": "必填"
+}

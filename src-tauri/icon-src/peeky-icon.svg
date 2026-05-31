@@ -1,0 +1,41 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="hat" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3ad0ad"/>
+      <stop offset="100%" stop-color="#1f8c74"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Transparent background: pure sprite, no squircle (macOS-style). -->
+
+  <!-- Peeky bust (the 120-unit sprite, scaled up and centered) -->
+  <g transform="translate(80,128) scale(7.3)">
+    <!-- cloak -->
+    <path d="M30 96 C28 70 34 50 60 50 C86 50 92 70 90 96 C78 90 70 92 60 92 C50 92 42 90 30 96 Z"
+          fill="#2c2f3a" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+
+    <!-- arms -->
+    <path d="M34 74 C24 78 22 88 28 94 C33 90 36 84 40 80 Z" fill="#2c2f3a"/>
+    <path d="M86 74 C96 78 98 88 92 94 C87 90 84 84 80 80 Z" fill="#2c2f3a"/>
+
+    <!-- face -->
+    <circle cx="60" cy="58" r="22" fill="#f3ead9"/>
+
+    <!-- eyes + sparkle -->
+    <circle cx="52" cy="58" r="4.4" fill="#2b2b30"/>
+    <circle cx="68" cy="58" r="4.4" fill="#2b2b30"/>
+    <circle cx="50.4" cy="56.2" r="1.4" fill="#ffffff"/>
+    <circle cx="66.4" cy="56.2" r="1.4" fill="#ffffff"/>
+
+    <!-- blush + smile -->
+    <circle cx="46" cy="66" r="3" fill="#2fbfa0" opacity="0.35"/>
+    <circle cx="74" cy="66" r="3" fill="#2fbfa0" opacity="0.35"/>
+    <path d="M55 67 Q60 71 65 67" fill="none" stroke="#7a5b46" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- magic hat -->
+    <path d="M40 40 L60 6 L80 40 Z" fill="url(#hat)"/>
+    <ellipse cx="60" cy="41" rx="26" ry="7" fill="#1f8c74"/>
+    <circle cx="60" cy="22" r="2.8" fill="#fff6cf"/>
+    <circle cx="66" cy="30" r="1.7" fill="#fff6cf"/>
+  </g>
+</svg>

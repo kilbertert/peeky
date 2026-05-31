@@ -1,0 +1,786 @@
+/*
+ * Peeky mascot styles — owned by Frontend-mascot (src/mascot.ts + src/mascot.css).
+ *
+ * The character is an inline SVG (see mascot.ts svgMarkup). All 7 animation
+ * states are driven by the [data-state] / .peeky-state-* classes set on
+ * .peeky-mascot. Mode accent colors come from the shared design tokens defined
+ * in style.css (--peeky-accent-roast / -nerd / -copilot).
+ *
+ * No images, no audio — purely vector + CSS keyframes.
+ */
+
+/* ------------------------------------------------------------------ layout - */
+
+.peeky-mascot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: var(--peeky-mascot-size, 96px);
+  height: var(--peeky-mascot-size, 96px);
+  /* Per-mode accent, resolved from class below; default roast. */
+  --peeky-mode-accent: var(--peeky-accent-roast);
+  --peeky-mode-accent-dark: #c85f1c;
+  pointer-events: none; /* only interactive sub-parts catch events */
+  z-index: 10;
+}
+
+/* Mode -> accent color (PRD §10). */
+.peeky-mascot.peeky-mode-roast {
+  --peeky-mode-accent: var(--peeky-accent-roast);
+  --peeky-mode-accent-dark: #c85f1c;
+}
+.peeky-mascot.peeky-mode-nerd {
+  --peeky-mode-accent: var(--peeky-accent-nerd);
+  --peeky-mode-accent-dark: #3a48a8;
+}
+.peeky-mascot.peeky-mode-copilot {
+  --peeky-mode-accent: var(--peeky-accent-copilot);
+  --peeky-mode-accent-dark: #1f8c74;
+}
+
+.peeky-character {
+  position: absolute;
+  inset: 0;
+  pointer-events: auto; /* the drag handle + click target */
+  cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-app-region: drag; /* hint for native drag where supported */
+  touch-action: none;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.28));
+}
+.peeky-character:active {
+  cursor: grabbing;
+}
+
+.peeky-svg {
+  display: block;
+  overflow: visible;
+}
+
+/* --------------------------------------------------------------- sprite base */
+
+.peeky-cloak {
+  fill: #2c2f3a;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 1;
+}
+.peeky-face {
+  fill: #f3ead9;
+}
+.peeky-eye {
+  fill: #2b2b30;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.peeky-spark {
+  fill: #ffffff;
+  opacity: 0; /* shown only on has-something */
+}
+.peeky-cheek {
+  fill: var(--peeky-mode-accent);
+  opacity: 0.35;
+}
+.peeky-mouth {
+  fill: none;
+  stroke: #7a5b46;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.peeky-arm {
+  fill: #2c2f3a;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.peeky-hat-brim {
+  fill: var(--peeky-mode-accent-dark);
+}
+.peeky-hat-star {
+  fill: #fff6cf;
+}
+.peeky-hat {
+  transform-box: view-box;
+  transform-origin: 60px 41px;
+}
+.peeky-aura {
+  opacity: 0.45;
+}
+
+/* hidden helper groups by default */
+.peeky-dots,
+.peeky-zzz {
+  opacity: 0;
+}
+.peeky-dots circle {
+  fill: var(--peeky-mode-accent);
+}
+.peeky-z {
+  fill: #9aa1b5;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--peeky-font, sans-serif);
+  opacity: 0;
+}
+.peeky-peek-line {
+  fill: #3a3d4a;
+  opacity: 0;
+}
+
+/* ===================================================================
+   STATE: idle — slow breathing, occasional blink, gentle look-around
+   =================================================================== */
+.peeky-state-idle .peeky-body {
+  animation: peeky-breathe 3.6s ease-in-out infinite,
+    peeky-look-around 9s ease-in-out infinite;
+  transform-box: view-box;
+  transform-origin: 60px 70px;
+}
+.peeky-state-idle .peeky-eye {
+  animation: peeky-blink 4.5s ease-in-out infinite;
+}
+.peeky-state-idle .peeky-hat {
+  animation: peeky-hat-sway 3.6s ease-in-out infinite;
+}
+
+@keyframes peeky-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.035);
+  }
+}
+@keyframes peeky-look-around {
+  0%,
+  40%,
+  100% {
+    transform: translateX(0);
+  }
+  55% {
+    transform: translateX(-2px);
+  }
+  70% {
+    transform: translateX(2px);
+  }
+}
+@keyframes peeky-blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  96% {
+    transform: scaleY(0.1);
+  }
+}
+@keyframes peeky-hat-sway {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+/* ===================================================================
+   STATE: scanning — peek over the screen edge, head turns
+   =================================================================== */
+.peeky-state-scanning .peeky-peek-line {
+  opacity: 1;
+}
+.peeky-state-scanning .peeky-body {
+  transform-box: view-box;
+  transform-origin: 60px 96px;
+  animation: peeky-peek 1.4s ease-in-out infinite;
+}
+.peeky-state-scanning .peeky-eyes {
+  animation: peeky-glance 1.4s ease-in-out infinite;
+  transform-box: view-box;
+  transform-origin: 60px 58px;
+}
+@keyframes peeky-peek {
+  0%,
+  100% {
+    transform: translateY(8px) scale(0.98);
+  }
+  50% {
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes peeky-glance {
+  0%,
+  100% {
+    transform: translateX(-2.5px);
+  }
+  50% {
+    transform: translateX(2.5px);
+  }
+}
+
+/* ===================================================================
+   STATE: thinking — spinning hat tilt, scratch, bouncing "…" dots
+   =================================================================== */
+.peeky-state-thinking .peeky-dots {
+  opacity: 1;
+}
+.peeky-state-thinking .peeky-dots circle {
+  animation: peeky-dot-bounce 1.2s ease-in-out infinite;
+}
+.peeky-state-thinking .peeky-dots circle:nth-child(2) {
+  animation-delay: 0.18s;
+}
+.peeky-state-thinking .peeky-dots circle:nth-child(3) {
+  animation-delay: 0.36s;
+}
+.peeky-state-thinking .peeky-hat {
+  animation: peeky-hat-think 2s ease-in-out infinite;
+}
+.peeky-state-thinking .peeky-body {
+  transform-box: view-box;
+  transform-origin: 60px 70px;
+  animation: peeky-tilt 2s ease-in-out infinite;
+}
+@keyframes peeky-dot-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+@keyframes peeky-hat-think {
+  0%,
+  100% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(8deg);
+  }
+}
+@keyframes peeky-tilt {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+/* ===================================================================
+   STATE: talking — body bob, hat bounce
+   =================================================================== */
+.peeky-state-talking .peeky-body {
+  transform-box: view-box;
+  transform-origin: 60px 96px;
+  animation: peeky-bob 0.6s ease-in-out infinite;
+}
+.peeky-state-talking .peeky-hat {
+  animation: peeky-hat-bob 0.6s ease-in-out infinite;
+}
+.peeky-state-talking .peeky-mouth {
+  animation: peeky-talk-mouth 0.36s ease-in-out infinite;
+}
+@keyframes peeky-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2.5px);
+  }
+}
+@keyframes peeky-hat-bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-3px) rotate(1deg);
+  }
+}
+@keyframes peeky-talk-mouth {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.8);
+  }
+}
+
+/* ===================================================================
+   STATE: has-something — eyes sparkle + a little hop (attention cue)
+   =================================================================== */
+.peeky-state-has-something .peeky-spark {
+  animation: peeky-sparkle 1.3s ease-in-out infinite;
+}
+.peeky-state-has-something .peeky-mascot,
+.peeky-state-has-something .peeky-character,
+.peeky-state-has-something .peeky-body {
+  transform-box: view-box;
+  transform-origin: 60px 96px;
+  animation: peeky-hop 0.7s ease-in-out infinite;
+}
+.peeky-state-has-something .peeky-aura {
+  animation: peeky-aura-pulse 1.3s ease-in-out infinite;
+}
+@keyframes peeky-sparkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+@keyframes peeky-hop {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-7px);
+  }
+  55% {
+    transform: translateY(0);
+  }
+  70% {
+    transform: translateY(-3px);
+  }
+}
+@keyframes peeky-aura-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* ===================================================================
+   STATE: working — sleeves roll, busy little wiggle
+   =================================================================== */
+.peeky-state-working .peeky-arm-l {
+  animation: peeky-sleeve-l 0.5s ease-in-out infinite;
+}
+.peeky-state-working .peeky-arm-r {
+  animation: peeky-sleeve-r 0.5s ease-in-out infinite;
+}
+.peeky-state-working .peeky-body {
+  transform-box: view-box;
+  transform-origin: 60px 80px;
+  animation: peeky-work-wiggle 0.5s ease-in-out infinite;
+}
+.peeky-state-working .peeky-hat {
+  animation: peeky-hat-sway 0.8s ease-in-out infinite;
+}
+@keyframes peeky-sleeve-l {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(-12deg);
+  }
+}
+@keyframes peeky-sleeve-r {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(12deg);
+  }
+}
+@keyframes peeky-work-wiggle {
+  0%,
+  100% {
+    transform: rotate(-1.5deg);
+  }
+  50% {
+    transform: rotate(1.5deg);
+  }
+}
+
+/* ===================================================================
+   STATE: paused — eyes closed, sleeping, drifting z-z (privacy signal)
+   =================================================================== */
+.peeky-state-paused .peeky-eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scaleY(0.12);
+}
+.peeky-state-paused .peeky-spark {
+  opacity: 0;
+}
+.peeky-state-paused .peeky-mouth {
+  d: path("M56 68 Q60 67 64 68");
+}
+.peeky-state-paused .peeky-body {
+  transform-box: view-box;
+  transform-origin: 60px 96px;
+  animation: peeky-snore 4s ease-in-out infinite;
+}
+.peeky-state-paused .peeky-hat {
+  transform: rotate(-10deg) translate(-3px, 1px);
+}
+.peeky-state-paused .peeky-aura {
+  opacity: 0.12;
+}
+.peeky-state-paused .peeky-zzz {
+  opacity: 1;
+}
+.peeky-state-paused .peeky-z-1 {
+  animation: peeky-zfloat 3s ease-in-out infinite;
+}
+.peeky-state-paused .peeky-z-2 {
+  animation: peeky-zfloat 3s ease-in-out infinite 1s;
+}
+.peeky-state-paused .peeky-z-3 {
+  animation: peeky-zfloat 3s ease-in-out infinite 2s;
+}
+@keyframes peeky-snore {
+  0%,
+  100% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.04) translateY(1px);
+  }
+}
+@keyframes peeky-zfloat {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.6);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(6px, -10px) scale(1.1);
+  }
+}
+
+/* ------------------------------------------------------- hover toolbar (§6.3) */
+
+.peeky-toolbar {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% - 6px);
+  transform: translateX(-50%) translateY(6px);
+  display: flex;
+  gap: 6px;
+  padding: 5px 7px;
+  border-radius: 999px;
+  background: var(--peeky-bubble-bg);
+  box-shadow: var(--peeky-bubble-shadow);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+/* Visibility is toggled by JS (.show), not :hover — see mascot.ts. */
+.peeky-toolbar.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.peeky-tool-btn {
+  appearance: none;
+  border: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--peeky-bubble-fg);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.12s ease;
+}
+.peeky-tool-btn svg {
+  width: 15px;
+  height: 15px;
+  display: block;
+}
+.peeky-tool-btn:hover {
+  background: var(--peeky-mode-accent);
+}
+
+/* ---------------------------------------------------------- speech bubble ---- */
+
+.peeky-bubble {
+  position: absolute;
+  /* A small, refined dark panel: rounded, slightly translucent, soft shadow.
+     The text lives INSIDE it (below) so it reads cleanly on any wallpaper/app
+     without a heavy per-character outline. */
+  width: 264px;
+  pointer-events: auto;
+  z-index: 20;
+  --peeky-bubble-shift: 0px;
+  background: var(--peeky-bubble-bg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 15px;
+  padding: 10px 13px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.42);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
+  backdrop-filter: saturate(140%) blur(10px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.peeky-bubble-text {
+  /* Small + refined for an assistant: legible but unobtrusive. */
+  font-size: 12.5px;
+  line-height: 1.4;
+  font-weight: 450;
+  letter-spacing: 0.1px;
+  text-align: left;
+  /* On the dark panel a light fill is enough — no outline / text-shadow. */
+  color: var(--peeky-bubble-fg);
+  text-shadow: none;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  -webkit-user-select: text;
+  user-select: text;
+  /* Capped height (~13 lines): a roomier card; the user scrolls inside it to
+     read more — output streams faster than you read. During streaming JS keeps
+     it pinned to the bottom (newest visible). */
+  max-height: 18em;
+  overflow-y: auto;
+  /* A hair of bottom space so the final line's descenders are never clipped at
+     max scroll, and contain overscroll so it doesn't bounce the whole overlay. */
+  padding-bottom: 2px;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.28) transparent;
+}
+
+/* Expanded (single-click the caption): grow to read a long message. */
+.peeky-bubble.expanded .peeky-bubble-text {
+  max-height: 60vh;
+}
+
+/* --- markdown rendered inside the caption (compact, on the dark panel) ------ */
+.peeky-bubble-text p {
+  margin: 0 0 0.28em;
+}
+.peeky-bubble-text p:last-child {
+  margin-bottom: 0;
+}
+.peeky-bubble-text strong {
+  font-weight: 650;
+  color: #ffffff;
+}
+.peeky-bubble-text em {
+  font-style: italic;
+}
+.peeky-bubble-text del {
+  opacity: 0.6;
+}
+.peeky-bubble-text code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.92em;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 0.05em 0.34em;
+  border-radius: 4px;
+}
+.peeky-bubble-text pre {
+  margin: 0.4em 0;
+  padding: 7px 9px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 8px;
+  overflow-x: auto;
+}
+.peeky-bubble-text pre code {
+  background: none;
+  padding: 0;
+  font-size: 0.9em;
+  line-height: 1.4;
+  white-space: pre;
+}
+.peeky-bubble-text ul,
+.peeky-bubble-text ol {
+  margin: 0.15em 0 0.28em;
+  padding-left: 1.25em;
+}
+.peeky-bubble-text li {
+  margin: 0.05em 0;
+}
+.peeky-bubble-text .md-h {
+  font-weight: 650;
+  color: #ffffff;
+  margin: 0.3em 0 0.25em;
+}
+.peeky-bubble-text .md-h1 {
+  font-size: 1.12em;
+}
+.peeky-bubble-text .md-h2 {
+  font-size: 1.06em;
+}
+.peeky-bubble-text blockquote {
+  margin: 0.3em 0;
+  padding-left: 0.7em;
+  border-left: 2px solid rgba(255, 255, 255, 0.25);
+  opacity: 0.85;
+}
+.peeky-bubble-text .md-link {
+  color: var(--peeky-mode-accent, #7da2ff);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Status line shown while the agent is running a tool (scrolling, typing, …).
+   It is the "I'm doing something, not just talking" cue for copilot mode. */
+.peeky-bubble-status .peeky-bubble-text {
+  font-style: italic;
+  font-weight: 500;
+  color: #e6e6ee;
+}
+.peeky-bubble-status .peeky-bubble-text::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: var(--peeky-mode-accent, #5b6ee1);
+  vertical-align: middle;
+  animation: peeky-status-pulse 1s ease-in-out infinite;
+}
+@keyframes peeky-status-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+/* Error / notice: warm-red text on the dark panel + a faint red rim. */
+.peeky-bubble-error {
+  border-color: rgba(255, 120, 120, 0.4);
+}
+.peeky-bubble-error .peeky-bubble-text {
+  color: #ff9d9d;
+}
+
+.peeky-bubble-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.96);
+}
+
+/* --- side placements: position the caption around the mascot --------------- */
+.peeky-bubble[data-side="bottom"] {
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(calc(-50% + var(--peeky-bubble-shift)));
+}
+.peeky-bubble[data-side="top"] {
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(calc(-50% + var(--peeky-bubble-shift)));
+}
+.peeky-bubble[data-side="right"] {
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+.peeky-bubble[data-side="left"] {
+  right: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* ------------------------------------------------ "ask about my screen" box - */
+
+.peeky-ask {
+  position: absolute;
+  width: 264px;
+  pointer-events: auto;
+  z-index: 25;
+  background: var(--peeky-bubble-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 9px 10px 7px;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
+  backdrop-filter: saturate(140%) blur(10px);
+  transition: opacity 0.16s ease, transform 0.16s ease;
+}
+
+.peeky-ask-input {
+  display: block;
+  width: 100%;
+  resize: none;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--peeky-bubble-fg);
+  font-family: var(--peeky-font);
+  font-size: 13px;
+  line-height: 1.45;
+  border-radius: 9px;
+  padding: 7px 9px;
+  max-height: 110px;
+  overflow-y: auto;
+  -webkit-user-select: text;
+  user-select: text;
+  caret-color: var(--peeky-mode-accent, #5b6ee1);
+}
+.peeky-ask-input::placeholder {
+  color: rgba(245, 245, 247, 0.4);
+}
+.peeky-ask-input:focus {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 0 1.5px var(--peeky-mode-accent, #5b6ee1);
+}
+
+.peeky-ask-hint {
+  margin-top: 5px;
+  font-size: 10.5px;
+  color: rgba(245, 245, 247, 0.5);
+  text-align: right;
+  letter-spacing: 0.2px;
+}
+
+.peeky-ask-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.peeky-ask[data-side="bottom"] {
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+.peeky-ask[data-side="top"] {
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+.peeky-ask[data-side="right"] {
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+.peeky-ask[data-side="left"] {
+  right: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* ----------------------------------------------------- reduced motion (a11y) */
+@media (prefers-reduced-motion: reduce) {
+  .peeky-mascot * {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+  }
+}

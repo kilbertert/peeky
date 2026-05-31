@@ -1,0 +1,88 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Peeky",
+  "version": "0.1.0",
+  "identifier": "info.agihunt.peeky",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:1420",
+    "beforeDevCommand": "pnpm dev",
+    "beforeBuildCommand": "pnpm build"
+  },
+  "app": {
+    "macOSPrivateApi": true,
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "label": "main",
+        "title": "Peeky",
+        "width": 360,
+        "height": 420,
+        "resizable": false,
+        "decorations": false,
+        "transparent": true,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "shadow": false,
+        "titleBarStyle": "Transparent",
+        "hiddenTitle": true,
+        "fullscreen": false,
+        "center": false
+      },
+      {
+        "label": "settings",
+        "title": "Peeky · Settings",
+        "url": "settings.html",
+        "width": 840,
+        "height": 560,
+        "minWidth": 720,
+        "minHeight": 460,
+        "resizable": true,
+        "decorations": true,
+        "transparent": false,
+        "alwaysOnTop": false,
+        "skipTaskbar": false,
+        "center": true,
+        "visible": false,
+        "focus": true
+      },
+      {
+        "label": "capture",
+        "title": "Peeky · Capture",
+        "url": "capture.html",
+        "width": 1280,
+        "height": 800,
+        "resizable": false,
+        "decorations": false,
+        "transparent": true,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "shadow": false,
+        "visible": false,
+        "focus": true,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; img-src 'self' data: asset: http://asset.localhost; style-src 'self' 'unsafe-inline'; connect-src ipc: http://ipc.localhost"
+    }
+  },
+  "plugins": {},
+  "bundle": {
+    "active": true,
+    "targets": ["app", "dmg"],
+    "category": "Productivity",
+    "shortDescription": "A transparent floating desktop AI companion.",
+    "longDescription": "Peeky is a transparent floating macOS desktop AI companion that watches your screen and speaks at the right moments.",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "macOS": {
+      "minimumSystemVersion": "11.0"
+    }
+  }
+}

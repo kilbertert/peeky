@@ -1,0 +1,591 @@
+/*
+ * Peeky settings panel styling (PRD §8.2).
+ * Clean card UI, scrollable, sized to fit the small companion window.
+ * Re-uses design tokens from style.css (var(--peeky-*)).
+ */
+
+.peeky-settings-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.peeky-settings-overlay[hidden] {
+  display: none;
+}
+
+/* Standalone settings WINDOW (its own opaque, decorated OS window) ----------
+ * Unlike the mascot overlay, this has a solid base so nothing from the desktop
+ * or other apps shows through, and the card fills the whole window: sticky
+ * header on top, scrollable body, sticky Save footer always visible.          */
+/* NOTE: style.css forces `background: transparent !important` on html/body for
+ * the mascot overlay, so the settings window MUST override with !important too,
+ * otherwise the desktop shows through and the panel "blends in". A full-height
+ * opaque <body> covers the viewport, so we don't need to touch <html>. */
+body.peeky-settings-window {
+  margin: 0;
+  height: 100%;
+  min-height: 100vh;
+  background: #1f1f24 !important;
+  overflow: hidden;
+}
+#settings-root {
+  height: 100%;
+}
+@media (prefers-color-scheme: light) {
+  body.peeky-settings-window {
+    background: #fbfbfd !important;
+  }
+}
+
+.peeky-settings-page {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  background: transparent;
+}
+.peeky-settings-page[hidden] {
+  display: none;
+}
+.peeky-settings-page > .peeky-settings-card {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* macOS-System-Settings-style layout: sidebar categories + content pane ----- */
+.peeky-settings-layout {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: stretch;
+}
+
+.peeky-settings-sidebar {
+  flex: 0 0 198px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 16px 10px;
+  overflow-y: auto;
+  background: rgba(127, 127, 127, 0.06);
+  border-right: 1px solid rgba(127, 127, 127, 0.16);
+}
+
+.peeky-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 550;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+.peeky-tab-btn:hover {
+  background: rgba(127, 127, 127, 0.14);
+}
+.peeky-tab-btn.active {
+  background: var(--peeky-accent-nerd);
+  color: #fff;
+}
+.peeky-tab-icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  opacity: 0.9;
+}
+.peeky-tab-icon svg {
+  width: 17px;
+  height: 17px;
+  display: block;
+}
+.peeky-tab-btn.active .peeky-tab-icon {
+  opacity: 1;
+}
+.peeky-tab-label {
+  flex: 1 1 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.peeky-settings-content {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-y: auto;
+  padding: 20px 26px 24px;
+}
+
+.peeky-tab-panel[hidden] {
+  display: none;
+}
+.peeky-tab-title {
+  margin: 0 0 14px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.peeky-tab-panel > .peeky-section:first-of-type {
+  padding-top: 0;
+}
+
+.peeky-settings-card {
+  display: flex;
+  flex-direction: column;
+  width: min(420px, 100%);
+  max-height: min(620px, 92vh);
+  background: #1f1f24;
+  color: #ededf0;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  font-family: var(--peeky-font);
+}
+
+@media (prefers-color-scheme: light) {
+  .peeky-settings-card {
+    background: #fbfbfd;
+    color: #1b1b1f;
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* Header ------------------------------------------------------------------- */
+.peeky-settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(127, 127, 127, 0.18);
+  flex: 0 0 auto;
+}
+
+.peeky-settings-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.peeky-icon-btn {
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 16px;
+  line-height: 1;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+.peeky-icon-btn:hover {
+  opacity: 1;
+  background: rgba(127, 127, 127, 0.16);
+}
+
+/* Body (scroll area) ------------------------------------------------------- */
+.peeky-settings-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 4px 18px 18px;
+}
+
+.peeky-section {
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(127, 127, 127, 0.12);
+}
+.peeky-section:last-child {
+  border-bottom: none;
+}
+
+.peeky-section-title {
+  margin: 4px 0 10px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.55;
+}
+
+/* Fields ------------------------------------------------------------------- */
+.peeky-field {
+  margin-bottom: 12px;
+}
+.peeky-field:last-child {
+  margin-bottom: 0;
+}
+
+.peeky-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.peeky-required {
+  color: #ff6b6b;
+}
+
+.peeky-hint {
+  margin: 4px 0 0;
+  font-size: 11.5px;
+  line-height: 1.4;
+  opacity: 0.55;
+}
+
+.peeky-input,
+.peeky-select {
+  width: 100%;
+  font-family: inherit;
+  font-size: 13px;
+  color: inherit;
+  background: rgba(127, 127, 127, 0.12);
+  border: 1px solid rgba(127, 127, 127, 0.22);
+  border-radius: 9px;
+  padding: 8px 10px;
+  outline: none;
+  user-select: text;
+  -webkit-user-select: text;
+}
+.peeky-input:focus,
+.peeky-select:focus {
+  border-color: var(--peeky-accent-nerd);
+  box-shadow: 0 0 0 3px rgba(91, 110, 225, 0.25);
+}
+
+.peeky-select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+/* Two-up grid for compact paired fields. */
+.peeky-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* API key reveal -----------------------------------------------------------*/
+.peeky-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.peeky-input-wrap .peeky-input {
+  padding-right: 38px;
+}
+.peeky-reveal-btn {
+  position: absolute;
+  right: 4px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 14px;
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  opacity: 0.6;
+}
+.peeky-reveal-btn:hover {
+  opacity: 1;
+  background: rgba(127, 127, 127, 0.16);
+}
+
+/* Toggles ----------------------------------------------------------------- */
+.peeky-toggle-field {
+  display: flex;
+  flex-direction: column;
+}
+.peeky-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+.peeky-toggle-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.peeky-toggle-track {
+  position: relative;
+  flex: 0 0 auto;
+  width: 38px;
+  height: 22px;
+  border-radius: 11px;
+  background: rgba(127, 127, 127, 0.32);
+  transition: background 0.18s ease;
+}
+.peeky-toggle-track::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  transition: transform 0.18s ease;
+}
+.peeky-toggle-input:checked + .peeky-toggle-track {
+  background: var(--peeky-accent-copilot);
+}
+.peeky-toggle-input:checked + .peeky-toggle-track::after {
+  transform: translateX(16px);
+}
+.peeky-toggle-input:focus-visible + .peeky-toggle-track {
+  box-shadow: 0 0 0 3px rgba(47, 191, 160, 0.35);
+}
+.peeky-toggle-label {
+  user-select: none;
+}
+
+/* Buttons ----------------------------------------------------------------- */
+.peeky-btn {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 9px;
+  padding: 8px 14px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: filter 0.15s ease, background 0.15s ease;
+}
+.peeky-btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.peeky-btn-primary {
+  background: var(--peeky-accent-nerd);
+  color: #fff;
+}
+.peeky-btn-primary:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+.peeky-btn-secondary {
+  background: rgba(127, 127, 127, 0.18);
+  color: inherit;
+  border-color: rgba(127, 127, 127, 0.24);
+}
+.peeky-btn-secondary:hover:not(:disabled) {
+  background: rgba(127, 127, 127, 0.28);
+}
+.peeky-btn-secondary.ok {
+  background: var(--peeky-accent-copilot);
+  color: #fff;
+}
+.peeky-btn-ghost {
+  background: transparent;
+  color: inherit;
+  opacity: 0.7;
+  padding: 6px 10px;
+}
+.peeky-btn-ghost:hover {
+  opacity: 1;
+  background: rgba(127, 127, 127, 0.14);
+}
+
+/* Test connection row ------------------------------------------------------ */
+.peeky-test-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+.peeky-test-result {
+  font-size: 12px;
+  opacity: 0.85;
+}
+.peeky-test-result.ok {
+  color: var(--peeky-accent-copilot);
+}
+.peeky-test-result.err {
+  color: #ff6b6b;
+}
+
+/* Mascot template block ---------------------------------------------------- */
+.peeky-mascot-heading {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.peeky-mascot-template {
+  width: 100%;
+  margin-top: 8px;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: inherit;
+  background: rgba(127, 127, 127, 0.12);
+  border: 1px solid rgba(127, 127, 127, 0.22);
+  border-radius: 9px;
+  padding: 10px;
+  resize: vertical;
+  white-space: pre;
+  overflow: auto;
+  user-select: text;
+  -webkit-user-select: text;
+}
+.peeky-mascot-template + .peeky-btn {
+  margin-top: 8px;
+}
+
+/* Stats -------------------------------------------------------------------- */
+.peeky-stats {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.peeky-stat-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 12.5px;
+  padding: 4px 0;
+  border-bottom: 1px dashed rgba(127, 127, 127, 0.16);
+}
+.peeky-stat-label {
+  opacity: 0.7;
+}
+.peeky-stat-value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+/* Pause row ---------------------------------------------------------------- */
+.peeky-pause-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.peeky-pause-status {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+/* Screen Recording permission status pill. */
+.peeky-perm-status {
+  font-weight: 600;
+  opacity: 1;
+}
+.peeky-perm-status.peeky-perm-ok {
+  color: #1f9d76;
+}
+.peeky-perm-status.peeky-perm-bad {
+  color: #e0683c;
+}
+
+/* Footer ------------------------------------------------------------------- */
+.peeky-settings-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 12px 18px;
+  border-top: 1px solid rgba(127, 127, 127, 0.18);
+  flex: 0 0 auto;
+}
+.peeky-save-result {
+  font-size: 12px;
+  margin-right: auto;
+}
+.peeky-save-result.ok {
+  color: var(--peeky-accent-copilot);
+}
+.peeky-save-result.err {
+  color: #ff6b6b;
+}
+
+/* History tab -------------------------------------------------------------- */
+.peeky-history-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+.peeky-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.peeky-history-row {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(127, 127, 127, 0.08);
+  border: 1px solid rgba(127, 127, 127, 0.12);
+}
+.peeky-history-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+  font-size: 11.5px;
+}
+.peeky-history-badge {
+  font-weight: 700;
+  font-size: 10.5px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  color: #fff;
+  background: #888;
+}
+.peeky-badge-roast {
+  background: var(--peeky-accent-roast);
+}
+.peeky-badge-nerd {
+  background: var(--peeky-accent-nerd);
+}
+.peeky-badge-copilot {
+  background: var(--peeky-accent-copilot);
+}
+.peeky-history-time {
+  opacity: 0.6;
+  font-variant-numeric: tabular-nums;
+}
+.peeky-history-app {
+  opacity: 0.6;
+  margin-left: auto;
+  max-width: 45%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.peeky-history-text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-word;
+  -webkit-user-select: text;
+  user-select: text;
+}

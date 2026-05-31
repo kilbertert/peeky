@@ -1,0 +1,179 @@
+{
+  "app.name": "Peeky",
+
+  "settings.title": "Peeky Settings",
+  "settings.close": "Close",
+  "settings.save": "Save",
+  "settings.saved": "Saved",
+  "settings.saving": "Saving…",
+
+  "settings.section.model": "Model",
+  "settings.section.behavior": "Behavior",
+  "settings.section.quiet": "Quiet & Focus",
+  "settings.section.capture": "Capture",
+  "settings.section.permission": "Permission",
+  "settings.section.language": "Language",
+  "settings.section.mascot": "Mascot",
+  "settings.section.stats": "Token Usage",
+  "settings.section.power": "Power",
+
+  "settings.tab.mode": "Mode",
+  "settings.tab.model": "Model",
+  "settings.tab.behavior": "Behavior",
+  "settings.tab.quiet": "Quiet",
+  "settings.tab.mascot": "Mascot",
+  "settings.tab.usage": "Usage",
+  "settings.tab.history": "History",
+  "settings.tab.general": "General",
+
+  "settings.mode.label": "Active mode",
+  "settings.mode.hint": "What Peeky does when it speaks (also: Ctrl+Shift+M).",
+
+  "settings.history.empty": "No history yet — Peeky's past remarks will show up here.",
+  "settings.history.clear": "Clear history",
+  "settings.history.cleared": "Cleared",
+
+  "error.config_incomplete": "Set your API Base URL, key, and model name in settings first (Ctrl+Shift+S).",
+  "error.capture": "Couldn't capture the screen — grant Screen Recording permission in System Settings.",
+  "error.api": "Model request failed",
+  "error.empty_response": "The model returned an empty reply — try raising max tokens (some models force a hidden \"thinking\" mode that eats the budget).",
+  "error.agent_limit": "Reached the action-step limit — stopping.",
+  "error.tool_blocked": "Action blocked",
+  "error.screen_permission": "Screen Recording permission is required to capture — enable Peeky in System Settings › Privacy & Security › Screen Recording, then restart the app.",
+
+  "settings.screenperm.label": "Screen Recording",
+  "settings.screenperm.hint": "Peeky needs this to see your screen. After granting it you usually have to restart the app.",
+  "settings.screenperm.granted": "Granted",
+  "settings.screenperm.denied": "Not granted",
+  "settings.screenperm.grant": "Grant…",
+  "settings.screenperm.recheck": "Re-check",
+  "settings.screenperm.black": "Granted, but capture is black — quit & reopen Peeky",
+  "error.screen_black": "Capture is black — Screen Recording permission usually needs a full quit & restart of Peeky to take effect (especially flaky in dev mode; test with the built app).",
+
+  "status.thinking": "Thinking…",
+  "status.reading": "Reading the screen…",
+  "status.scrolling": "Scrolling…",
+  "status.clicking": "Clicking…",
+  "status.typing": "Typing…",
+  "status.key": "Pressing keys…",
+  "status.acting": "Working…",
+
+  "ask.placeholder": "Ask about this screen…",
+  "ask.hint": "Enter to send · Shift+Enter newline · Esc to cancel",
+  "capture.loading": "Preparing screenshot…",
+  "capture.hint": "Drag to select a region · Esc to cancel",
+
+  "settings.baseUrl.label": "Base URL",
+  "settings.baseUrl.placeholder": "https://platform.stepfun.com/v1",
+  "settings.baseUrl.hint": "Any OpenAI-compatible endpoint (cloud, self-hosted, or local).",
+  "settings.baseUrl.required": "Base URL is required.",
+
+  "settings.apiKey.label": "API Key",
+  "settings.apiKey.placeholder": "sk-…",
+  "settings.apiKey.hint": "Stored locally. May also be provided via the PEEKY_API_KEY environment variable.",
+  "settings.apiKey.required": "API Key is required.",
+  "settings.apiKey.show": "Show key",
+  "settings.apiKey.hide": "Hide key",
+
+  "settings.model.label": "Model name",
+  "settings.model.placeholder": "step-3.7-flash",
+  "settings.model.hint": "A vision-capable model (OpenAI chat/completions format).",
+  "settings.model.required": "Model name is required.",
+
+  "settings.maxTokens.label": "Max output tokens",
+  "settings.maxTokens.hint": "Upper bound on each reply length.",
+
+  "settings.temperature.label": "Temperature",
+  "settings.temperature.hint": "Higher = more varied, lower = more focused.",
+
+  "settings.reasoning.label": "Reasoning effort",
+  "settings.reasoning.hint": "How much the model 'thinks' before replying: lower = faster, higher = more thorough. Most models (e.g. Step 3.7 Flash) reason by default; lowering it speeds replies noticeably. Note: 'Off' depends on the provider — StepFun only supports low/medium/high, so Off may be ignored or error there (use Low).",
+  "reasoning.off": "Off · fastest",
+  "reasoning.low": "Low · fast (default)",
+  "reasoning.medium": "Medium · balanced",
+  "reasoning.high": "High · best, slowest",
+
+  "settings.test.button": "Test connection",
+  "settings.test.testing": "Testing…",
+  "settings.test.success": "Connection OK",
+  "settings.test.failed": "Connection failed",
+
+  "settings.sensitivity.label": "Trigger sensitivity",
+  "settings.sensitivity.hint": "How easily a screen change wakes Peeky up.",
+
+  "settings.budget.label": "Speech budget (per hour)",
+  "settings.budget.hint": "Max number of proactive remarks per hour. Extra moments are saved silently.",
+
+  "settings.quietHours.label": "Quiet hours",
+  "settings.quietHours.enable": "Enable quiet hours",
+  "settings.quietHours.start": "Start",
+  "settings.quietHours.end": "End",
+  "settings.quietHours.hint": "During this window Peeky stays quiet. May wrap past midnight.",
+
+  "settings.followDnd.label": "Follow system Do Not Disturb",
+  "settings.followDnd.hint": "When macOS Focus / DND is on, Peeky stays quiet automatically.",
+
+  "settings.screenshotQuality.label": "Screenshot quality",
+  "settings.screenshotQuality.hint": "Higher quality improves recognition but uses more tokens.",
+
+  "settings.permission.label": "Permission mode",
+  "settings.permission.hint": "Controls how much Peeky may act on its own (only affects doing, not seeing or speaking).",
+
+  "settings.language.label": "Language",
+  "settings.language.hint": "UI and reply language. Auto follows your system locale.",
+
+  "settings.mascot.heading": "Make it your own mascot",
+  "settings.mascot.intro": "Want a Peeky of your very own? Copy the snippet below, change the description, and send it to the Codex installed on your computer.",
+  "settings.mascot.copy": "Copy instruction",
+  "settings.mascot.copied": "Copied!",
+  "settings.mascot.template": "Please generate a custom mascot for \"Peeky\", a desktop screen companion. Theme: <describe your mascot here, e.g. \"an orange cat wearing a wizard hat\">.\nRequirements:\n1. Generate an animated sprite set (sprite sheet / frame sequence) covering these states:\n   idle / scanning / thinking / talking / has-something / working / paused\n   A few frames per state, consistent style, smooth between frames, transparent background.\n2. Replace the generated assets directly into the app's mascot resource directory:\n   <APP_ASSETS_DIR>/mascot/<state>/frame_*.png\n   (one folder per state, incrementing file numbers, overwrite existing files).\n3. When done, quit and restart the \"Peeky\" app so the new mascot takes effect.",
+
+  "settings.showStats.label": "Show token usage stats",
+  "settings.showStats.hint": "Display call and token counters in this panel.",
+
+  "settings.stats.calls": "Calls",
+  "settings.stats.prompt": "Prompt tokens",
+  "settings.stats.completion": "Completion tokens",
+  "settings.stats.silent": "Silent replies",
+  "settings.stats.refresh": "Refresh",
+  "settings.stats.hidden": "Token stats are hidden. Enable \"Show token usage stats\" to see them.",
+
+  "settings.pause.label": "Observation",
+  "settings.pause.paused": "Paused — Peeky is asleep",
+  "settings.pause.active": "Active — Peeky is watching",
+  "settings.pause.button.pause": "Pause",
+  "settings.pause.button.resume": "Resume",
+
+  "quality.low": "Low",
+  "quality.med": "Medium",
+  "quality.high": "High",
+
+  "mode.roast": "Roast",
+  "mode.nerd": "Nerd",
+  "mode.copilot": "Copilot",
+  "mode.roast.desc": "A witty friend by your side.",
+  "mode.nerd.desc": "Adds background you might not know.",
+  "mode.copilot.desc": "From watching to doing.",
+
+  "permission.yolo": "YOLO",
+  "permission.auto": "Auto",
+  "permission.cautious": "Cautious",
+  "permission.yolo.desc": "Acts autonomously; still bound by hard limits.",
+  "permission.auto.desc": "Low-risk auto; confirms riskier steps.",
+  "permission.cautious.desc": "Approve every step.",
+
+  "language.auto": "Auto (system)",
+  "language.en": "English",
+  "language.zh": "中文",
+  "language.ja": "日本語",
+
+  "tooltip.settings": "Settings",
+  "tooltip.pause": "Pause / Resume (double-click)",
+  "tooltip.mode": "Switch mode",
+  "tooltip.trigger": "Look now",
+  "tooltip.tools": "Tools",
+
+  "common.on": "On",
+  "common.off": "Off",
+  "common.required": "Required"
+}

@@ -1,0 +1,179 @@
+{
+  "app.name": "Peeky",
+
+  "settings.title": "Peeky 設定",
+  "settings.close": "閉じる",
+  "settings.save": "保存",
+  "settings.saved": "保存しました",
+  "settings.saving": "保存中…",
+
+  "settings.section.model": "モデル",
+  "settings.section.behavior": "ふるまい",
+  "settings.section.quiet": "静音とフォーカス",
+  "settings.section.capture": "キャプチャ",
+  "settings.section.permission": "権限",
+  "settings.section.language": "言語",
+  "settings.section.mascot": "マスコット",
+  "settings.section.stats": "トークン消費",
+  "settings.section.power": "オン/オフ",
+
+  "settings.tab.mode": "モード",
+  "settings.tab.model": "モデル",
+  "settings.tab.behavior": "動作",
+  "settings.tab.quiet": "静音",
+  "settings.tab.mascot": "精霊",
+  "settings.tab.usage": "使用状況",
+  "settings.tab.history": "履歴",
+  "settings.tab.general": "一般",
+
+  "settings.mode.label": "現在のモード",
+  "settings.mode.hint": "ピーキーが話すときの振る舞い（Ctrl+Shift+M でも切替）。",
+
+  "settings.history.empty": "履歴はまだありません——ピーキーの発言がここに表示されます。",
+  "settings.history.clear": "履歴を消去",
+  "settings.history.cleared": "消去しました",
+
+  "error.config_incomplete": "まず設定で API のベースURL・キー・モデル名を入力してください（Ctrl+Shift+S）。",
+  "error.capture": "画面をキャプチャできません——システム設定で画面収録の権限を許可してください。",
+  "error.api": "モデルへのリクエストに失敗しました",
+  "error.empty_response": "モデルが空の応答を返しました——max tokens を増やしてみてください（一部のモデルは隠れた「思考」モードでトークンを使い切ります）。",
+  "error.agent_limit": "操作ステップ上限に達したため停止しました。",
+  "error.tool_blocked": "操作がブロックされました",
+  "error.screen_permission": "スクリーンショットには「画面収録」の権限が必要です — システム設定 › プライバシーとセキュリティ › 画面収録 で Peeky を有効にし、アプリを再起動してください。",
+
+  "settings.screenperm.label": "画面収録の権限",
+  "settings.screenperm.hint": "Peeky が画面を見るために必要です。許可後はアプリの再起動が必要な場合があります。",
+  "settings.screenperm.granted": "許可済み",
+  "settings.screenperm.denied": "未許可",
+  "settings.screenperm.grant": "許可する…",
+  "settings.screenperm.recheck": "再確認",
+  "settings.screenperm.black": "許可済みですが画面が黒い — Peeky を完全に終了して再起動してください",
+  "error.screen_black": "画面が黒く映ります — 画面収録の権限は Peeky を完全に終了して再起動しないと有効にならないことがあります（開発モードでは特に不安定。ビルド済みアプリでの確認を推奨）。",
+
+  "status.thinking": "考え中…",
+  "status.reading": "画面を確認中…",
+  "status.scrolling": "スクロール中…",
+  "status.clicking": "クリック中…",
+  "status.typing": "入力中…",
+  "status.key": "キー操作中…",
+  "status.acting": "操作中…",
+
+  "ask.placeholder": "この画面について質問…",
+  "ask.hint": "Enter で送信 · Shift+Enter で改行 · Esc でキャンセル",
+  "capture.loading": "スクリーンショットを準備中…",
+  "capture.hint": "ドラッグで範囲を選択 · Esc でキャンセル",
+
+  "settings.baseUrl.label": "Base URL",
+  "settings.baseUrl.placeholder": "https://platform.stepfun.com/v1",
+  "settings.baseUrl.hint": "OpenAI 互換のエンドポイントなら何でも（クラウド / 自前ホスト / ローカル）。",
+  "settings.baseUrl.required": "Base URL は必須です。",
+
+  "settings.apiKey.label": "API キー",
+  "settings.apiKey.placeholder": "sk-…",
+  "settings.apiKey.hint": "ローカルに保存されます。環境変数 PEEKY_API_KEY からも指定できます。",
+  "settings.apiKey.required": "API キーは必須です。",
+  "settings.apiKey.show": "キーを表示",
+  "settings.apiKey.hide": "キーを隠す",
+
+  "settings.model.label": "モデル名",
+  "settings.model.placeholder": "step-3.7-flash",
+  "settings.model.hint": "ビジョン対応モデル（OpenAI chat/completions 形式）。",
+  "settings.model.required": "モデル名は必須です。",
+
+  "settings.maxTokens.label": "最大出力トークン",
+  "settings.maxTokens.hint": "1 回の返答の長さの上限。",
+
+  "settings.temperature.label": "温度",
+  "settings.temperature.hint": "高いほど多様、低いほど集中。",
+
+  "settings.reasoning.label": "推論レベル",
+  "settings.reasoning.hint": "回答前にモデルが「考える」度合い：低いほど速く、高いほど丁寧。多くのモデル（Step 3.7 Flash など）は既定で推論するため、下げると体感が大きく速くなります。注意：「オフ」は提供元次第——StepFun は低/中/高のみ対応で、オフは無視またはエラーになることがあります（その場合は「低」を）。",
+  "reasoning.off": "オフ · 最速",
+  "reasoning.low": "低 · 速い（既定）",
+  "reasoning.medium": "中 · バランス",
+  "reasoning.high": "高 · 最も丁寧・最も遅い",
+
+  "settings.test.button": "接続テスト",
+  "settings.test.testing": "テスト中…",
+  "settings.test.success": "接続 OK",
+  "settings.test.failed": "接続失敗",
+
+  "settings.sensitivity.label": "トリガー感度",
+  "settings.sensitivity.hint": "画面の変化でどれだけ Peeky が反応しやすいか。",
+
+  "settings.budget.label": "発言バジェット（毎時）",
+  "settings.budget.hint": "1 時間に自発的に話す回数の上限。超えた分は静かに溜めます。",
+
+  "settings.quietHours.label": "静音時間帯",
+  "settings.quietHours.enable": "静音時間帯を有効にする",
+  "settings.quietHours.start": "開始",
+  "settings.quietHours.end": "終了",
+  "settings.quietHours.hint": "この時間帯は Peeky は静かにします。深夜をまたいでも構いません。",
+
+  "settings.followDnd.label": "システムのおやすみモードに従う",
+  "settings.followDnd.hint": "macOS の集中モード / おやすみモード中は Peeky が自動で静かになります。",
+
+  "settings.screenshotQuality.label": "スクリーンショット品質",
+  "settings.screenshotQuality.hint": "品質が高いほど認識精度が上がりますが、トークン消費も増えます。",
+
+  "settings.permission.label": "権限モード",
+  "settings.permission.hint": "Peeky がどこまで自律的に操作できるかを制御（「する」だけに影響し、「見る」「話す」には影響しません）。",
+
+  "settings.language.label": "言語",
+  "settings.language.hint": "UI と返答の言語。自動はシステムのロケールに従います。",
+
+  "settings.mascot.heading": "自分だけのマスコットに",
+  "settings.mascot.intro": "自分だけの Peeky が欲しいですか？下のテキストをコピーして説明を書き換え、お使いのコンピュータにインストール済みの Codex に送ってください。",
+  "settings.mascot.copy": "指示をコピー",
+  "settings.mascot.copied": "コピーしました！",
+  "settings.mascot.template": "デスクトップの画面コンパニオン「Peeky」用に、カスタムマスコットを生成してください。テーマ：<ここにマスコットの説明を書く。例：「魔法使いの帽子をかぶったオレンジ色の猫」>。\n要件：\n1. 次の状態をカバーするアニメーション用スプライト一式（スプライトシート / フレーム列）を生成する：\n   idle / scanning / thinking / talking / has-something / working / paused\n   各状態に数フレーム、スタイル統一、フレーム間は滑らか、背景は透過。\n2. 生成したリソースファイルを、アプリのマスコットリソースディレクトリに直接置き換える：\n   <APP_ASSETS_DIR>/mascot/<state>/frame_*.png\n   （状態ごとにフォルダ分け、連番のファイル名、既存ファイルを上書き）。\n3. 完了したら「Peeky」アプリを終了して再起動し、新しいマスコットを反映させる。",
+
+  "settings.showStats.label": "トークン消費の統計を表示",
+  "settings.showStats.hint": "このパネルに呼び出し回数とトークン数を表示します。",
+
+  "settings.stats.calls": "呼び出し回数",
+  "settings.stats.prompt": "プロンプトトークン",
+  "settings.stats.completion": "出力トークン",
+  "settings.stats.silent": "沈黙した回数",
+  "settings.stats.refresh": "更新",
+  "settings.stats.hidden": "トークン統計は非表示です。「トークン消費の統計を表示」をオンにしてください。",
+
+  "settings.pause.label": "観察",
+  "settings.pause.paused": "一時停止中 —— Peeky は眠っています",
+  "settings.pause.active": "稼働中 —— Peeky は見ています",
+  "settings.pause.button.pause": "一時停止",
+  "settings.pause.button.resume": "再開",
+
+  "quality.low": "低",
+  "quality.med": "中",
+  "quality.high": "高",
+
+  "mode.roast": "ツッコミ",
+  "mode.nerd": "物知り",
+  "mode.copilot": "副操縦",
+  "mode.roast.desc": "そばにいるユーモアのある友だち。",
+  "mode.nerd.desc": "あなたが知らないかもしれない背景を補足。",
+  "mode.copilot.desc": "「見る」から「する」へ。",
+
+  "permission.yolo": "YOLO",
+  "permission.auto": "Auto",
+  "permission.cautious": "慎重",
+  "permission.yolo.desc": "ほとんどの操作を自律実行。ハード制限には従います。",
+  "permission.auto.desc": "低リスクは自動、高リスクは先に確認。",
+  "permission.cautious.desc": "すべてのステップで承認が必要。",
+
+  "language.auto": "自動（システムに従う）",
+  "language.en": "English",
+  "language.zh": "中文",
+  "language.ja": "日本語",
+
+  "tooltip.settings": "設定",
+  "tooltip.pause": "一時停止 / 再開（ダブルクリック）",
+  "tooltip.mode": "モード切り替え",
+  "tooltip.trigger": "今すぐ見る",
+  "tooltip.tools": "ツール",
+
+  "common.on": "オン",
+  "common.off": "オフ",
+  "common.required": "必須"
+}

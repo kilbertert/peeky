@@ -1,0 +1,48 @@
+[package]
+name = "peeky"
+version = "0.1.0"
+description = "Peeky — a transparent floating macOS desktop AI companion."
+authors = ["Peeky contributors"]
+license = "MIT"
+edition = "2021"
+rust-version = "1.77"
+
+# The library is what Tauri's mobile/desktop entrypoints link against.
+[lib]
+name = "peeky_lib"
+crate-type = ["staticlib", "cdylib", "lib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["macos-private-api"] }
+tauri-plugin-global-shortcut = "2"
+tauri-plugin-opener = "2"
+
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+tokio = { version = "1", features = ["full"] }
+reqwest = { version = "0.12", features = ["json", "stream"] }
+futures-util = "0.3"
+bytes = "1"
+
+image = "0.25"
+xcap = "0.9"
+enigo = "0.3"
+base64 = "0.22"
+
+sys-locale = "0.3"
+anyhow = "1"
+thiserror = "2"
+chrono = "0.4"
+dirs = "6"
+parking_lot = "0.12"
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+lto = true
+opt-level = "s"
+strip = true

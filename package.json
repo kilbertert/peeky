@@ -1,0 +1,24 @@
+{
+  "name": "peeky",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Peeky — a transparent floating macOS desktop AI companion built with Tauri 2.",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.0.0",
+    "@tauri-apps/plugin-global-shortcut": "^2.0.0",
+    "@tauri-apps/plugin-opener": "^2.0.0"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.0.0",
+    "typescript": "^5.6.0",
+    "vite": "^5.4.0"
+  }
+}
