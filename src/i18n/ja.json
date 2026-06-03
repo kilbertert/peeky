@@ -64,7 +64,7 @@
   "capture.hint": "ドラッグで範囲を選択 · Esc でキャンセル",
 
   "settings.baseUrl.label": "Base URL",
-  "settings.baseUrl.placeholder": "https://platform.stepfun.com/v1",
+  "settings.baseUrl.placeholder": "https://api.stepfun.com/v1",
   "settings.baseUrl.hint": "OpenAI 互換のエンドポイントなら何でも（クラウド / 自前ホスト / ローカル）。",
   "settings.baseUrl.required": "Base URL は必須です。",
 

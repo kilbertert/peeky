@@ -64,7 +64,7 @@
   "capture.hint": "Drag to select a region · Esc to cancel",
 
   "settings.baseUrl.label": "Base URL",
-  "settings.baseUrl.placeholder": "https://platform.stepfun.com/v1",
+  "settings.baseUrl.placeholder": "https://api.stepfun.com/v1",
   "settings.baseUrl.hint": "Any OpenAI-compatible endpoint (cloud, self-hosted, or local).",
   "settings.baseUrl.required": "Base URL is required.",
 

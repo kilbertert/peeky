@@ -80,7 +80,7 @@ quit and relaunch peeky (DWM quirk on some adapters).
 ### Configure the model
 
 Open settings (gear on hover, or `Ctrl+Shift+S`) and set **Base URL**, **API
-Key**, **Model** (e.g. `https://platform.stepfun.com/v1` / `step-3.7-flash`).
+Key**, **Model** (e.g. `https://api.stepfun.com/v1` / `step-3.7-flash`).
 The key can instead come from the `PEEKY_API_KEY` env var (see `.env.example`) —
 **keys are never committed.** Use **Test connection** to verify.
 

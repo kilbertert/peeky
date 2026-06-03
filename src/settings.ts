@@ -63,7 +63,7 @@ interface HistoryItem {
 /** Sensible client-side fallback mirroring Config::default() in types.rs. */
 function defaultConfig(): Config {
   return {
-    api_base_url: "https://platform.stepfun.com/v1",
+    api_base_url: "https://api.stepfun.com/v1",
     api_key: "",
     model: "step-3.7-flash",
     max_tokens: 300,

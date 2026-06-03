@@ -68,7 +68,7 @@ Windows **没有 per-app 的"屏幕录制"开关**——peeky 第一次截图时
 ### 配置模型
 
 打开设置（悬停点齿轮，或 `Ctrl+Shift+S`），填写 **Base URL**、**API Key**、
-**模型**（例如 `https://platform.stepfun.com/v1` / `step-3.7-flash`）。
+**模型**（例如 `https://api.stepfun.com/v1` / `step-3.7-flash`）。
 密钥也可通过环境变量 `PEEKY_API_KEY` 提供（见 `.env.example`）——**密钥绝不入库**。
 用 **测试连接** 验证。
 

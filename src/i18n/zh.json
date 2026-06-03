@@ -64,7 +64,7 @@
   "capture.hint": "按住拖动选择区域 · Esc 取消",
 
   "settings.baseUrl.label": "Base URL",
-  "settings.baseUrl.placeholder": "https://platform.stepfun.com/v1",
+  "settings.baseUrl.placeholder": "https://api.stepfun.com/v1",
   "settings.baseUrl.hint": "任意兼容 OpenAI 协议的端点（云端 / 私有化 / 本地）。",
   "settings.baseUrl.required": "Base URL 为必填项。",
 
