@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rtk ls *)",
+      "Bash(rtk grep *)",
+      "mcp__plugin_claude-mem_mcp-search__smart_outline",
+      "mcp__plugin_claude-mem_mcp-search__get_observations",
+      "Bash(rtk wc *)",
+      "Bash(rtk read *)",
+      "Bash(node -e 'const e=require\\(\"./src/i18n/en.json\"\\),z=require\\(\"./src/i18n/zh.json\"\\),j=require\\(\"./src/i18n/ja.json\"\\);const k=o=>Object.keys\\(o\\).sort\\(\\);const eq=\\(a,b\\)=>{a=k\\(a\\);b=k\\(b\\);return a.length===b.length&&a.every\\(\\(x,i\\)=>x===b[i]\\)};console.log\\(eq\\(e,z\\)&&eq\\(e,j\\)\\)')",
+      "Bash(rtk cargo *)",
+      "Bash(rtk tsc *)",
+      "Bash(export PATH=\"/c/Users/q1234/.rustup/toolchains/stable-x86_64-pc-windows-msvc/bin:$PATH\")",
+      "Bash(rustc --version)",
+      "Bash(cargo tree *)",
+      "Bash(rustup update *)",
+      "Bash(rtk find *)",
+      "Bash(CARGO_UNSTABLE_EDITION2024=1 rtk cargo check)",
+      "Bash(where winget *)",
+      "Bash(where choco *)",
+      "Bash(where scoop *)",
+      "Bash(where curl *)",
+      "Bash(where powershell *)",
+      "Bash(where link *)",
+      "Bash(where cl *)",
+      "Bash(\"C:/Program Files \\(x86\\)/Microsoft Visual Studio/Installer/vswhere.exe\" -all -products * -property installationPath)",
+      "Bash(winget install *)",
+      "Bash(export PATH=\"/c/Users/q1234/.cargo/bin:$PATH\")",
+      "Bash(rustup --version)",
+      "Bash(rustup toolchain *)",
+      "Bash(rustup default *)",
+      "Bash(RUSTFLAGS=\"-D warnings\" rtk cargo check)",
+      "Bash(pnpm build *)",
+      "Bash(rtk pnpm *)",
+      "Bash(node -e 'const e=require\\(\"./src/i18n/en.json\"\\),z=require\\(\"./src/i18n/zh.json\"\\),j=require\\(\"./src/i18n/ja.json\"\\);const k=o=>Object.keys\\(o\\).sort\\(\\);const eq=\\(a,b\\)=>{a=k\\(a\\);b=k\\(b\\);return a.length===b.length&&a.every\\(\\(x,i\\)=>x===b[i]\\)};console.log\\(\"i18n parity:\",eq\\(e,z\\)&&eq\\(e,j\\)\\)')",
+      "Bash(where makensis *)",
+      "Bash(where candle *)",
+      "Bash(where light *)",
+      "Bash(pnpm tauri *)",
+      "Bash(rtk git *)"
+    ]
+  }
+}
